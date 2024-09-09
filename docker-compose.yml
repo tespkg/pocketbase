@@ -1,0 +1,23 @@
+version: '3'
+services:
+  pocketbase:
+    build: .
+    ports:
+      - 8090:8090
+    depends_on:
+      - postgres
+    environment:
+      - LOGS_DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_logs?sslmode=disable
+      - DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_db?sslmode=disable
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
