@@ -9,6 +9,8 @@ services:
     environment:
       - LOGS_DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_logs?sslmode=disable
       - DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_db?sslmode=disable
+    volumes:
+      - ./examples/base/pb_migrations:/user/src/app/pb_migrations
 
   postgres:
     image: postgres:latest
