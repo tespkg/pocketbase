@@ -94,8 +94,8 @@ migrate((db) => {
       }
     ],
     "indexes": [],
-    "listRule": null,
-    "viewRule": null,
+    "listRule": "",
+    "viewRule": "",
     "createRule": "@request.auth.id != ''",
     "updateRule": "@request.auth.id != ''",
     "deleteRule": "@request.auth.id != ''",

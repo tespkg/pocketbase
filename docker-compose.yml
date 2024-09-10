@@ -1,5 +1,16 @@
 version: '3'
 services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
+
   pocketbase:
     build: .
     ports:
@@ -12,14 +23,5 @@ services:
     volumes:
       - ./examples/base/pb_migrations:/user/src/app/pb_migrations
 
-  postgres:
-    image: postgres:latest
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 volumes:
   postgres_data:
