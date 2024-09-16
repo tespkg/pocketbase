@@ -93,7 +93,7 @@ migrate((db) => {
         "id": "k6xbv6lj",
         "name": "sector",
         "type": "select",
-        "required": false,
+        "required": true,
         "presentable": false,
         "unique": false,
         "options": {

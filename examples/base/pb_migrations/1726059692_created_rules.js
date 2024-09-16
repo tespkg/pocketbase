@@ -1,16 +1,16 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((db) => {
   const collection = new Collection({
-    "id": "6oz7hyzu10m4aoo",
-    "created": "2024-09-04 12:55:55.830Z",
-    "updated": "2024-09-04 12:55:55.830Z",
-    "name": "law",
+    "id": "e6mgymg6p1fbvsd",
+    "created": "2024-09-11 13:01:32.475Z",
+    "updated": "2024-09-11 13:01:32.475Z",
+    "name": "rules",
     "type": "base",
     "system": false,
     "schema": [
       {
         "system": false,
-        "id": "mtxu49y0",
+        "id": "yp9p1jw2",
         "name": "title_en",
         "type": "text",
         "required": false,
@@ -24,7 +24,7 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "crf6lb0z",
+        "id": "zauytjro",
         "name": "title_ar",
         "type": "text",
         "required": false,
@@ -38,7 +38,7 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "pfuwu7mj",
+        "id": "nzz5ichf",
         "name": "law_number",
         "type": "text",
         "required": false,
@@ -52,7 +52,7 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "m16fq1wh",
+        "id": "zqqrhxwx",
         "name": "year",
         "type": "number",
         "required": false,
@@ -66,7 +66,7 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "3paajddc",
+        "id": "9eveq7ka",
         "name": "classification_en",
         "type": "text",
         "required": false,
@@ -80,7 +80,7 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "ovcph3c1",
+        "id": "e2uemtsz",
         "name": "classification_ar",
         "type": "text",
         "required": false,
@@ -94,7 +94,7 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "ee2ghyst",
+        "id": "hjjobv5v",
         "name": "attachments",
         "type": "json",
         "required": false,
@@ -106,10 +106,10 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "48ivbnxw",
+        "id": "fqfl5gch",
         "name": "type",
         "type": "select",
-        "required": false,
+        "required": true,
         "presentable": false,
         "unique": false,
         "options": {
@@ -134,7 +134,7 @@ migrate((db) => {
   return Dao(db).saveCollection(collection);
 }, (db) => {
   const dao = new Dao(db);
-  const collection = dao.findCollectionByNameOrId("6oz7hyzu10m4aoo");
+  const collection = dao.findCollectionByNameOrId("e6mgymg6p1fbvsd");
 
   return dao.deleteCollection(collection);
 })
