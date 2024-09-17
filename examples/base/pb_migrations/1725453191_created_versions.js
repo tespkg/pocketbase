@@ -40,24 +40,32 @@ migrate((db) => {
         "system": false,
         "id": "116nwb2k",
         "name": "cover",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       },
       {
         "system": false,
         "id": "r39ftsw3",
         "name": "attachments",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
         }
       }
     ],

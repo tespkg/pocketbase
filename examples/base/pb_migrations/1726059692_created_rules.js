@@ -96,12 +96,16 @@ migrate((db) => {
         "system": false,
         "id": "hjjobv5v",
         "name": "attachments",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
         }
       },
       {

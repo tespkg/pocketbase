@@ -10,26 +10,34 @@ migrate((db) => {
     "schema": [
       {
         "system": false,
-        "id": "xg3eemjb",
-        "name": "audio",
-        "type": "json",
+        "id": "4tkjbvqt",
+        "name": "cover_image",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       },
       {
         "system": false,
-        "id": "jnuuhuqk",
-        "name": "cover_image",
-        "type": "json",
+        "id": "ddv2a1sb",
+        "name": "audio",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       },
       {

@@ -40,24 +40,32 @@ migrate((db) => {
         "system": false,
         "id": "ixyb2dod",
         "name": "cover_image",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       },
       {
         "system": false,
         "id": "8lpm5lgp",
         "name": "attachments",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       }
     ],

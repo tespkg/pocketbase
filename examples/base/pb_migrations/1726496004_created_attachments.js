@@ -1,33 +1,17 @@
 /// <reference path="../pb_data/types.d.ts" />
 migrate((db) => {
   const collection = new Collection({
-    "id": "87j52gvwuakjv6t",
-    "created": "2024-09-04 10:06:21.229Z",
-    "updated": "2024-09-04 10:06:21.229Z",
-    "name": "organizational_chart",
+    "id": "1bp57azl51u4zmw",
+    "created": "2024-09-16 14:13:24.052Z",
+    "updated": "2024-09-16 14:13:24.052Z",
+    "name": "attachments",
     "type": "base",
     "system": false,
     "schema": [
       {
         "system": false,
-        "id": "6qrtwc71",
-        "name": "images",
-        "type": "relation",
-        "required": false,
-        "presentable": false,
-        "unique": false,
-        "options": {
-          "collectionId": "1bp57azl51u4zmw",
-          "cascadeDelete": true,
-          "minSelect": null,
-          "maxSelect": null,
-          "displayFields": null
-        }
-      },
-      {
-        "system": false,
-        "id": "k7pnno6p",
-        "name": "title_en",
+        "id": "0snhfyv2",
+        "name": "url",
         "type": "text",
         "required": false,
         "presentable": false,
@@ -40,8 +24,8 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "zodgjf2d",
-        "name": "title_ar",
+        "id": "5gwccqed",
+        "name": "bucket",
         "type": "text",
         "required": false,
         "presentable": false,
@@ -54,8 +38,8 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "y3bybhnx",
-        "name": "description_en",
+        "id": "1qmvvkuc",
+        "name": "object",
         "type": "text",
         "required": false,
         "presentable": false,
@@ -68,8 +52,22 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "cteaqsog",
-        "name": "description_ar",
+        "id": "cqrcthu6",
+        "name": "size",
+        "type": "number",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "noDecimal": false
+        }
+      },
+      {
+        "system": false,
+        "id": "locorkye",
+        "name": "file_name",
         "type": "text",
         "required": false,
         "presentable": false,
@@ -82,18 +80,30 @@ migrate((db) => {
       },
       {
         "system": false,
-        "id": "mhyt9zcl",
-        "name": "attachments",
-        "type": "relation",
+        "id": "zu8fb2d1",
+        "name": "subject",
+        "type": "text",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "collectionId": "1bp57azl51u4zmw",
-          "cascadeDelete": true,
-          "minSelect": null,
-          "maxSelect": null,
-          "displayFields": null
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "system": false,
+        "id": "hgcy3upz",
+        "name": "content_type",
+        "type": "text",
+        "required": false,
+        "presentable": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
         }
       }
     ],
@@ -109,7 +119,7 @@ migrate((db) => {
   return Dao(db).saveCollection(collection);
 }, (db) => {
   const dao = new Dao(db);
-  const collection = dao.findCollectionByNameOrId("87j52gvwuakjv6t");
+  const collection = dao.findCollectionByNameOrId("1bp57azl51u4zmw");
 
   return dao.deleteCollection(collection);
 })

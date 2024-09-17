@@ -98,7 +98,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -112,15 +115,22 @@ null
   "description_en": "test",
   "title_ar": "test",
   "description_ar": "test",
-  "images": "JSON",
-  "attachments": "JSON"
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>specializations</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -134,8 +144,12 @@ null
   "description_en": "test",
   "title_ar": "test",
   "description_ar": "test",
-  "images": "JSON",
-  "attachments": "JSON"
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
@@ -148,6 +162,7 @@ null
 ```
 null
 ```
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
 
 <br>
 
@@ -157,7 +172,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -167,19 +185,26 @@ null
   "collectionName": "organizational_chart",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "title_en": "test",
   "title_ar": "test",
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON"
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>organizational_chart</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -189,12 +214,16 @@ null
   "collectionName": "organizational_chart",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "title_en": "test",
   "title_ar": "test",
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON"
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
@@ -208,6 +237,8 @@ null
 null
 ```
 
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
+
 <br>
 
 
@@ -217,7 +248,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -227,19 +261,25 @@ null
   "collectionName": "minister_speech",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "title_en": "test",
   "title_ar": "test",
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON"
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>minister_speech</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -248,12 +288,16 @@ null
   "collectionName": "minister_speech",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "title_en": "test",
   "title_ar": "test",
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON"
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
@@ -266,6 +310,7 @@ null
 ```
 null
 ```
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
 
 <br>
 
@@ -275,7 +320,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Required</span> <span>sector</span></div></td> <td><span class="label">String</span></td> <td>Values: FoodSafetyAndQuality, FoodSecurity, WaterResources, FishWealth, Livestock, Agriculture</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>image</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-success">Required</span> <span>sector</span></div></td> <td><span class="label">String</span></td> <td>Values: FoodSafetyAndQuality, FoodSecurity, WaterResources, FishWealth, Livestock, Agriculture</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -285,12 +333,16 @@ null
   "collectionName": "sectors",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "image": "JSON",
+  "image": [
+    "RELATION_RECORD_ID"
+  ],
   "title_en": "test",
   "title_ar": "test",
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ],
   "sector": "FoodSafetyAndQuality"
 }
 ```
@@ -298,7 +350,9 @@ null
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>sectors</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Required</span> <span>sector</span></div></td> <td><span class="label">String</span></td> <td>Values: FoodSafetyAndQuality, FoodSecurity, WaterResources, FishWealth, Livestock, Agriculture</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>image</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-success">Required</span> <span>sector</span></div></td> <td><span class="label">String</span></td> <td></td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -307,12 +361,16 @@ null
   "collectionName": "sectors",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "image": "JSON",
+  "image": [
+    "RELATION_RECORD_ID"
+  ],
   "title_en": "test",
   "title_ar": "test",
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ],
   "sector": "FoodSafetyAndQuality"
 }
 ```
@@ -326,6 +384,7 @@ null
 ```
 null
 ```
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
 
 <br>
 
@@ -335,7 +394,9 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_name</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_avatar</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_name</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_avatar</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
 <strong>Response: 200</strong>
 
 ```json
@@ -345,27 +406,33 @@ null
   "collectionName": "ministry_news",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "cover_image": "JSON",
+  "cover_image": "RELATION_RECORD_ID",
   "title_en": "test",
   "title_ar": "test",
   "caption_en": "test",
   "caption_ar": "test",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ],
   "author": true,
   "publish": true,
   "publish_date": "2022-01-01 10:00:00.123Z",
   "author_name": "test",
-  "author_avatar": "JSON"
+  "author_avatar": "RELATION_RECORD_ID"
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>ministry_news</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_name</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_avatar</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>caption_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_name</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>author_avatar</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -374,20 +441,24 @@ null
   "collectionName": "ministry_news",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "cover_image": "JSON",
+  "cover_image": "RELATION_RECORD_ID",
   "title_en": "test",
   "title_ar": "test",
   "caption_en": "test",
   "caption_ar": "test",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ],
   "author": true,
   "publish": true,
   "publish_date": "2022-01-01 10:00:00.123Z",
   "author_name": "test",
-  "author_avatar": "JSON"
+  "author_avatar": "RELATION_RECORD_ID"
 }
 ```
 <br>
@@ -401,6 +472,7 @@ null
 null
 ```
 
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
 <br>
 
 ### Collection "versions"
@@ -409,7 +481,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -421,15 +496,19 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "title_en": "test",
   "title_ar": "test",
-  "cover": "JSON",
-  "attachments": "JSON"
+  "cover": "RELATION_RECORD_ID",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>versions</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -440,8 +519,10 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "title_en": "test",
   "title_ar": "test",
-  "cover": "JSON",
-  "attachments": "JSON"
+  "cover": "RELATION_RECORD_ID",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
@@ -455,6 +536,8 @@ null
 null
 ```
 
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
+
 <br>
 
 ### Collection "visuals"
@@ -463,7 +546,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -475,15 +561,18 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "title_en": "test",
   "title_ar": "test",
-  "cover_image": "JSON",
-  "attachments": "JSON"
+  "cover_image": "RELATION_RECORD_ID",
+  "attachments": "RELATION_RECORD_ID"
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>visuals</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
+
 
 ```json
 {
@@ -494,8 +583,8 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "title_en": "test",
   "title_ar": "test",
-  "cover_image": "JSON",
-  "attachments": "JSON"
+  "cover_image": "RELATION_RECORD_ID",
+  "attachments": "RELATION_RECORD_ID"
 }
 ```
 <br>
@@ -508,6 +597,7 @@ null
 ```
 null
 ```
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
 
 <br>
 
@@ -517,7 +607,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>audio</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>link</span></div></td> <td><span class="label">String</span></td> <td>URL address.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>audio</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>link</span></div></td> <td><span class="label">String</span></td> <td>URL address.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -527,8 +620,8 @@ null
   "collectionName": "acoustics",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "audio": "JSON",
-  "cover_image": "JSON",
+  "cover_image": "RELATION_RECORD_ID",
+  "audio": "RELATION_RECORD_ID",
   "title_en": "test",
   "title_ar": "test",
   "link": "https://example.com",
@@ -540,7 +633,9 @@ null
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>acoustics</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>audio</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>link</span></div></td> <td><span class="label">String</span></td> <td>URL address.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>audio</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>link</span></div></td> <td><span class="label">String</span></td> <td>URL address.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td></td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -549,8 +644,8 @@ null
   "collectionName": "acoustics",
   "created": "2022-01-01 01:00:00.123Z",
   "updated": "2022-01-01 23:59:59.456Z",
-  "audio": "JSON",
-  "cover_image": "JSON",
+  "cover_image": "RELATION_RECORD_ID",
+  "audio": "RELATION_RECORD_ID",
   "title_en": "test",
   "title_ar": "test",
   "link": "https://example.com",
@@ -569,6 +664,8 @@ null
 null
 ```
 
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
+
 <br>
 
 ### Collection "information_designs"
@@ -577,7 +674,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(*) Relation record id.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -589,14 +689,16 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "title_en": "test",
   "title_ar": "test",
-  "cover_image": "JSON"
+  "cover_image": "RELATION_RECORD_ID"
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>information_designs</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>cover_image</span></div></td> <td><span class="label">String</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -607,7 +709,7 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "title_en": "test",
   "title_ar": "test",
-  "cover_image": "JSON"
+  "cover_image": "RELATION_RECORD_ID"
 }
 ```
 <br>
@@ -621,6 +723,8 @@ null
 null
 ```
 
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
+
 <br>
 
 ### Collection "rules"
@@ -629,7 +733,10 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>law_number</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>year</span></div></td> <td><span class="label">Number</span></td> <td>Number value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-success">Required</span> <span>type</span></div></td> <td><span class="label">String</span></td> <td>Values: Law, ExecutiveRegulations, Discussions</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>law_number</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>year</span></div></td> <td><span class="label">Number</span></td> <td>Number value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-success">Required</span> <span>type</span></div></td> <td><span class="label">String</span></td> <td></td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
+
 <strong>Response: 200</strong>
 
 ```json
@@ -645,7 +752,9 @@ null
   "year": 123,
   "classification_en": "test",
   "classification_ar": "test",
-  "attachments": "JSON",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ],
   "type": "Law"
 }
 ```
@@ -653,7 +762,9 @@ null
 
 <div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>rules</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Body:</strong>
-<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>law_number</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>year</span></div></td> <td><span class="label">Number</span></td> <td>Number value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-success">Required</span> <span>type</span></div></td> <td><span class="label">String</span></td> <td>Values: Law, ExecutiveRegulations, Discussions</td> </tr></tbody></table>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>law_number</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>year</span></div></td> <td><span class="label">Number</span></td> <td>Number value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>classification_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-success">Required</span> <span>type</span></div></td> <td><span class="label">String</span></td> <td></td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -668,7 +779,9 @@ null
   "year": 123,
   "classification_en": "test",
   "classification_ar": "test",
-  "attachments": "JSON",
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ],
   "type": "Law"
 }
 ```
@@ -683,6 +796,8 @@ null
 null
 ```
 
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
+
 <br>
 
 ### Collection "marketing"
@@ -693,7 +808,7 @@ null
                 <br>
                 If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td>Format: "2022-01-01 10:00:00.123Z"</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Required</span> <span>sector</span></div></td> <td><span class="label">String</span></td> <td>Values: Marketing, AgriculturalInvestment, FishInvestment</td> </tr></tbody></table>
 
-*: the array accepts only id of records of topics collection so you will need to call POST method of topics collection to create a topic record then sets the id returned by POST into the array.
+- (*): the array accepts only id of records of topics collection so you will need to call POST method of topics collection to create a topic record then sets the id returned by POST into the array.
 
 <strong>Response: 200</strong>
 
@@ -720,7 +835,7 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>title_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish</span></div></td> <td><span class="label">Boolean</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>publish_date</span></div></td> <td><span class="label">String</span></td> <td>Format: "2022-01-01 10:00:00.123Z"</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Required</span> <span>sector</span></div></td> <td><span class="label">String</span></td> <td>Values: Marketing, AgriculturalInvestment, FishInvestment</td> </tr></tbody></table>
 
-(**): the array accepts only id of records of topics collection so int this case you will need to use a combination of POST - PATCH - DELETE from topics collection in order to achieve the desired result.
+- (**): the array accepts only id of records of topics collection so int this case you will need to use a combination of POST - PATCH - DELETE from topics collection in order to achieve the desired result.
 
 ```json
 {
@@ -760,7 +875,9 @@ null
 <strong>Body:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
                 <br>
-                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(*) Relation record ids.</td> </tr></tbody></table>
+
+- (*): the array accepts only id of records of attachments collection so you will need to call POST method of attachments collection to create an attachment record then sets the id returned by POST into the array.
 
 <strong>Response: 200</strong>
 
@@ -773,15 +890,23 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "topic_en": "test",
   "topic_ar": "test",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON"
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
 
-<table class="table-compact table-border m-b-base"><thead><tr><th>Param</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">String</span></td> <td>JSON array or object.</td> </tr></tbody></table>
+<div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>topics</strong>/records/<strong>:id</strong></p></div> </div>
+<strong>Body:</strong>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_en</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>topic_ar</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>images</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_en</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>description_ar</span></div></td> <td><span class="label">String</span></td> <td></td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>attachments</span></div></td> <td><span class="label">Array&lt;String&gt;</span></td> <td>(**) Relation record id.</td> </tr></tbody></table>
+
+- (**): the array accepts only id of records of attachments collection so int this case you will need to use a combination of POST - PATCH - DELETE from attachments collection in order to achieve the desired result.
 
 ```json
 {
@@ -792,15 +917,81 @@ null
   "updated": "2022-01-01 23:59:59.456Z",
   "topic_en": "test",
   "topic_ar": "test",
-  "images": "JSON",
+  "images": [
+    "RELATION_RECORD_ID"
+  ],
   "description_en": "test",
   "description_ar": "test",
-  "attachments": "JSON"
+  "attachments": [
+    "RELATION_RECORD_ID"
+  ]
 }
 ```
 <br>
 
 <div class="alert alert-warning"><strong class="label label-primary">DELETE</strong> <div class="content"><p>/api/collections/<strong>topics</strong>/records/<strong>:id</strong></p></div> </div>
+<strong>Path Params:</strong>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Param</th> <th>Type</th> <th width="60%">Description</th></tr></thead> <tbody><tr><td>id</td> <td><span class="label">String</span></td> <td>ID of the record to delete.</td></tr></tbody></table>
+<strong>Response: 204</strong>
+
+```
+null
+```
+- Make sure to call for DELETE api of attachment collection to delete records of attachment before deleting this record.
+
+<br>
+
+### collection "attachments"
+<div class="alert alert-success"><strong class="label label-primary">POST</strong> <div class="content"><p>/api/collections/<strong>attachments</strong>/records</p></div> </div>
+
+<strong>Body:</strong>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>id</span></div></td> <td><span class="label">String</span></td> <td><strong>15 characters string</strong> to store as record ID.
+                <br>
+                If not set, it will be auto generated.</td></tr>  <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>url</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>bucket</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>object</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>size</span></div></td> <td><span class="label">Number</span></td> <td>Number value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>file_name</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>subject</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>content_type</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr></tbody></table>
+
+<strong>Response: 200</strong>
+
+```json
+{
+  "id": "RECORD_ID",
+  "collectionId": "1bp57azl51u4zmw",
+  "collectionName": "attachments",
+  "created": "2022-01-01 01:00:00.123Z",
+  "updated": "2022-01-01 23:59:59.456Z",
+  "url": "test",
+  "bucket": "test",
+  "object": "test",
+  "size": 123,
+  "file_name": "test",
+  "subject": "test",
+  "content_type": "test"
+}
+```
+<br>
+
+<div class="alert alert-warning"><strong class="label label-primary">PATCH</strong> <div class="content"><p>/api/collections/<strong>attachments</strong>/records/<strong>:id</strong></p></div> </div>
+<strong>Body:</strong>
+<table class="table-compact table-border m-b-base"><thead><tr><th>Field</th> <th>Type</th> <th width="50%">Description</th></tr></thead> <tbody> <tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>url</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>bucket</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>object</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>size</span></div></td> <td><span class="label">Number</span></td> <td>Number value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>file_name</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>subject</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr><tr><td><div class="inline-flex"><span class="label label-warning">Optional</span> <span>content_type</span></div></td> <td><span class="label">String</span></td> <td>Plain text value.</td> </tr></tbody></table>
+
+```json
+{
+  "id": "RECORD_ID",
+  "collectionId": "1bp57azl51u4zmw",
+  "collectionName": "attachments",
+  "created": "2022-01-01 01:00:00.123Z",
+  "updated": "2022-01-01 23:59:59.456Z",
+  "url": "test",
+  "bucket": "test",
+  "object": "test",
+  "size": 123,
+  "file_name": "test",
+  "subject": "test",
+  "content_type": "test"
+}
+```
+<br>
+
+<div class="alert alert-warning"><strong class="label label-primary">DELETE</strong> <div class="content"><p>/api/collections/<strong>attachments</strong>/records/<strong>:id</strong></p></div> </div>
 <strong>Path Params:</strong>
 <table class="table-compact table-border m-b-base"><thead><tr><th>Param</th> <th>Type</th> <th width="60%">Description</th></tr></thead> <tbody><tr><td>id</td> <td><span class="label">String</span></td> <td>ID of the record to delete.</td></tr></tbody></table>
 <strong>Response: 204</strong>

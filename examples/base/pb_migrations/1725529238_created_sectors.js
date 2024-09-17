@@ -12,12 +12,16 @@ migrate((db) => {
         "system": false,
         "id": "tpe3r9nb",
         "name": "image",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
         }
       },
       {
@@ -80,12 +84,16 @@ migrate((db) => {
         "system": false,
         "id": "9ait06c3",
         "name": "attachments",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
         }
       },
       {

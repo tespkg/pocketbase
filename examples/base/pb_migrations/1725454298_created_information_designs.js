@@ -40,12 +40,16 @@ migrate((db) => {
         "system": false,
         "id": "zaxuywzu",
         "name": "cover_image",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       }
     ],

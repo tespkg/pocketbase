@@ -12,12 +12,16 @@ migrate((db) => {
         "system": false,
         "id": "ddyaefbi",
         "name": "cover_image",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       },
       {
@@ -80,12 +84,16 @@ migrate((db) => {
         "system": false,
         "id": "ybxpqydj",
         "name": "images",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
         }
       },
       {
@@ -120,12 +128,16 @@ migrate((db) => {
         "system": false,
         "id": "ekvx2wpc",
         "name": "attachments",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": null,
+          "displayFields": null
         }
       },
       {
@@ -179,12 +191,16 @@ migrate((db) => {
         "system": false,
         "id": "b3stjdvk",
         "name": "author_avatar",
-        "type": "json",
+        "type": "relation",
         "required": false,
         "presentable": false,
         "unique": false,
         "options": {
-          "maxSize": 2000000
+          "collectionId": "1bp57azl51u4zmw",
+          "cascadeDelete": true,
+          "minSelect": null,
+          "maxSelect": 1,
+          "displayFields": null
         }
       }
     ],
