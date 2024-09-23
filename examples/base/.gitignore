@@ -1,0 +1,7 @@
+# ignore everything
+/*
+
+# exclude from the ignore filter
+!.gitignore
+!pb_migrations_mafwr_cms
+!main.go

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
+
+  pocketbase:
+    build: .
+    ports:
+      - 8090:8090
+    depends_on:
+      - postgres
+    environment:
+      - LOGS_DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_logs?sslmode=disable
+      - DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_db?sslmode=disable
+    volumes:
+      - ./examples/base/pb_migrations_mafwr_cms:/user/src/app/pb_migrations
+
+volumes:
+  postgres_data:
