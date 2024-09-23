@@ -10,13 +10,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   pocketbase:
     build: .
     ports:
       - 8090:8090
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       - LOGS_DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_logs?sslmode=disable
       - DATABASE=postgresql://postgres:postgres@postgres:5432/pocketbase_db?sslmode=disable
