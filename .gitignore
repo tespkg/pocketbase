@@ -12,6 +12,13 @@ coverage.out
 # plaintask todo files
 *.todo
 
+# application specific ignores and go build outputs
+volumes/*
+pb_migrations/*
+pb_data/*
+server
+*.exe
+
 # generated markdown previews
 README.html
 CHANGELOG.html
