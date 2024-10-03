@@ -37,10 +37,17 @@ jobs:
         with:
           go-version: '>=1.22.5'
 
+      - name: Configure git for private modules
+        run: |
+          git config --global url."https://github-ci-token:${{ secrets.CI_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://gitlab-ci-token:${{ secrets.GITLAB_CI_TOKEN }}@gitlab.com/".insteadOf "https://gitlab.com/"
+          export GOPRIVATE=gitlab.com/target-energysolutions,tespkg.in    
+
       - name: Build Admin dashboard UI
         run: npm --prefix=./ui ci && npm --prefix=./ui run build  
-     
       
+
+    
      # - name: Run GoReleaser
      #   uses: goreleaser/goreleaser-action@v3
      #   with:
@@ -116,14 +123,14 @@ jobs:
       # - name: Set up tools
       #   uses: tespkg/action@set_up_tools
 
-      # - name: Push to dev
-      #   ## your main branch
-      #   ## push the image name to env-dev/${{ github.repository }}
-      #   if: ${{ github.ref == 'refs/heads/develop' }}
-      #   uses: tespkg/action@deploy_to_dev
-      #   with:
-      #     ALIAS_GITHUB_REPOSITORY: ${{ github.repository }}
-      #     TES_ENV: dev
+      - name: Push to dev
+         ## your main branch
+         ## push the image name to env-dev/${{ github.repository }}
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        uses: tespkg/action@deploy_to_dev
+        with:
+          ALIAS_GITHUB_REPOSITORY: ${{ github.repository }}
+          TES_ENV: dev
 
       - name: Push to mixed
         ## push the image name to env-mixed/${{ github.repository }}-${branch}
