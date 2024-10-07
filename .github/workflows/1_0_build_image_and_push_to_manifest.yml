@@ -95,18 +95,8 @@ jobs:
       - name: Push image to gitlab registry
         run: |
           echo ${{ secrets.GITLAB_CR_PAT }} | docker login registry.gitlab.com -u ${{ secrets.GITLAB_CR_USER }} --password-stdin
-          if [ "$DEFAULT_MOULE" != "ignore" ] ;then
-          echo "docker push $GITLAB_IMAGE_NAME"
           docker push $GITLAB_IMAGE_NAME
-          fi
-
-          if [ "$SECOND_MODULE" != "ignore" ] && [ "$SECOND_MODULE" != "null" ] && [ "$SECOND_MODULE" != "" ];then
-          docker push $GITLAB_IMAGE_NAME_SECOND_MODULE
-          fi          
-          if [ "$THIRD_MODULE" != "ignore" ] && [ "$THIRD_MODULE" != "null" ] && [ "$THIRD_MODULE" != "" ];then
-          docker push $GITLAB_IMAGE_NAME_THIRD_MODULE
-          fi
-
+  
   push_to_manifest:
     runs-on: [self-hosted, linux, k8s]
     name: push to manifest
