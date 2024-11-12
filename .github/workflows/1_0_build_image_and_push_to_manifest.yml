@@ -1,0 +1,132 @@
+name: build_and_push_to_manifest
+on:
+  push:
+    branches:
+      - "*"
+    # tags:
+    #   - '*.*.*'
+  pull_request:
+  workflow_dispatch:
+env:
+  GITLAB_REGISTRY: registry.gitlab.com/target-digital-transformation/devops
+  DEFAULT_MOULE: true ## true, ingore, default is true
+  SECOND_MODULE: null ## null, ignore, ${MODULE_NAME}, default is null
+  SECOND_MODULE_FOR_COMMON: "common2 common3"
+  THIRD_MODULE: null
+  THIRD_MODULE_FOR_COMMON: "common4 common5"
+
+jobs:
+  build_and_push_image:
+    name: build and push docker image
+    if: contains(github.ref, 'refs/heads/')
+    # if: contains(github.ref, 'refs/tags/')
+    runs-on: [self-hosted, linux, k8s]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.11.0    
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '>=1.22.5'
+
+      - name: Configure git for private modules
+        run: |
+          git config --global url."https://github-ci-token:${{ secrets.CI_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://gitlab-ci-token:${{ secrets.GITLAB_CI_TOKEN }}@gitlab.com/".insteadOf "https://gitlab.com/"
+          export GOPRIVATE=gitlab.com/target-energysolutions,tespkg.in    
+
+      - name: Build Admin dashboard UI
+        run: npm --prefix=./ui ci && npm --prefix=./ui run build  
+      
+
+    
+     # - name: Run GoReleaser
+     #   uses: goreleaser/goreleaser-action@v3
+     #   with:
+     #     distribution: goreleaser
+     #     version: latest
+     #     args: release --clean
+     #   env:
+     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+
+   #   - name: Build
+   #     run: |
+   #     CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -o main main.go
+
+      - name: Docker image name env
+        run: |
+          echo "GITLAB_IMAGE_NAME=${GITLAB_REGISTRY}/${GITHUB_REPOSITORY}:${GITHUB_SHA::8}"
+          echo "GITLAB_IMAGE_NAME=${GITLAB_REGISTRY}/${GITHUB_REPOSITORY}:${GITHUB_SHA::8}" >> $GITHUB_ENV
+
+          echo "GITLAB_IMAGE_NAME_SECOND_MODULE=${GITLAB_REGISTRY}/${GITHUB_REPOSITORY}-${SECOND_MODULE}:${GITHUB_SHA::8}"
+          echo "GITLAB_IMAGE_NAME_SECOND_MODULE=${GITLAB_REGISTRY}/${GITHUB_REPOSITORY}-${SECOND_MODULE}:${GITHUB_SHA::8}" >> $GITHUB_ENV
+          echo "GITLAB_IMAGE_NAME_THIRD_MODULE=${GITLAB_REGISTRY}/${GITHUB_REPOSITORY}-${THIRD_MODULE}:${GITHUB_SHA::8}"
+          echo "GITLAB_IMAGE_NAME_THIRD_MODULE=${GITLAB_REGISTRY}/${GITHUB_REPOSITORY}-${THIRD_MODULE}:${GITHUB_SHA::8}" >> $GITHUB_ENV
+      - name: Build docker image
+        # permission change due to: actions/upload-artifact#38
+        # https://github.com/gliderlabs/docker-alpine/issues/307#issuecomment-357247928
+        run: |
+          if [ "$DEFAULT_MOULE" != "ignore" ] ;then
+          docker build -f Dockerfile -t $GITLAB_IMAGE_NAME .
+          fi
+
+          if [ "$SECOND_MODULE" != "ignore" ] && [ "$SECOND_MODULE" != "null" ] && [ "$SECOND_MODULE" != "" ];then
+          echo "-----build the SECOND_MODULE docker image----"
+          docker build -f- -t $GITLAB_IMAGE_NAME_SECOND_MODULE . <<EOF
+          FROM alpine:3.14
+          EOF
+          fi
+
+          if [ "$THIRD_MODULE" != "ignore" ] && [ "$THIRD_MODULE" != "null" ] && [ "$THIRD_MODULE" != "" ];then
+          echo "-----build the THIRD_MODULE docker image----"
+          docker build -f- -t $GITLAB_IMAGE_NAME_THIRD_MODULE . <<EOF
+          FROM alpine:3.14
+          EOF
+          fi
+
+      - name: Push image to gitlab registry
+        run: |
+          echo ${{ secrets.GITLAB_CR_PAT }} | docker login registry.gitlab.com -u ${{ secrets.GITLAB_CR_USER }} --password-stdin
+          docker push $GITLAB_IMAGE_NAME
+  
+  push_to_manifest:
+    runs-on: [self-hosted, linux, k8s]
+    name: push to manifest
+    if: ${{ github.ref != 'tag' }}
+    needs:
+      - build_and_push_image
+    steps:
+      - name: Checkout manifest repo
+        uses: actions/checkout@v2
+        with:
+          repository: tespkg/tes_manifests
+          token: ${{ secrets.TES_MANIFEST_TOKEN }}
+
+      # - name: Set up tools
+      #   uses: tespkg/action@set_up_tools
+
+      - name: Push to dev
+         ## your main branch
+         ## push the image name to env-dev/${{ github.repository }}
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        uses: tespkg/action@deploy_to_dev
+        with:
+          ALIAS_GITHUB_REPOSITORY: ${{ github.repository }}
+          TES_ENV: dev
+
+      - name: Push to mixed
+        ## push the image name to env-mixed/${{ github.repository }}-${branch}
+        ## fill your spec branch
+        if: ${{ github.ref == 'REPLACEME' }}
+        uses: tespkg/action@deploy_to_dev
+        with:
+          ALIAS_GITHUB_REPOSITORY: ${{ github.repository }}
+          TES_ENV: mixed
